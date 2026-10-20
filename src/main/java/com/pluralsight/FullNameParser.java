@@ -10,13 +10,15 @@ public class FullNameParser {
 
         System.out.println("Enter your full name: ");
         String userFullName = userInput.nextLine().trim();
-        String[] fullName = wordRemover(userFullName);
+        String[] fullName = nameSeparator(userFullName);
 
         String firstName = fullName[0];
         String middleName = "(none)";
         String lastName = "(none)";
+        String shortenedMN = middleName;
         if (fullName.length > 2) {
             middleName = fullName[1];
+            shortenedMN = middleNameMod(fullName[1]);
             lastName = fullName[2];
         } else if (fullName.length > 1) {
             //middleName = "(none)";
@@ -27,10 +29,16 @@ public class FullNameParser {
                 First name: %s
                 Middle name: %s
                 Last name: %s
-                """, firstName, middleName, lastName);
+                """, firstName, shortenedMN, lastName);
     }
 
-    public static String[] wordRemover (String word) {
+    public static String middleNameMod (String middleName) {
+        char charMiddleName = middleName.toUpperCase().charAt(0);
+        String newMiddleName = charMiddleName + ".";
+        return newMiddleName;
+    }
+
+    public static String[] nameSeparator(String word) {
         String[] names = word.split("\\ ");
         if (names[0].isEmpty()) {
             names[0] = "(none)";
