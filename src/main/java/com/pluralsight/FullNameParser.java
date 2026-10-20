@@ -11,7 +11,17 @@ public class FullNameParser {
         System.out.println("Enter your full name: ");
         String userFullName = userInput.nextLine().trim();
         String[] fullName = wordRemover(userFullName);
-        System.out.println(fullName[0] + fullName[1] + fullName[2]);
+
+        String firstName = fullName[0];
+        String middleName;
+        String lastName;
+        if (fullName.length > 2) {
+            middleName = fullName[1];
+            lastName = fullName[2];
+        } else if (fullName.length > 1) {
+            middleName = "(none)";
+            lastName = fullName[1];
+        }
     }
 
     public static String[] wordRemover (String word) {
